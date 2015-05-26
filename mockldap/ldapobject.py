@@ -277,7 +277,16 @@ class LDAPObject(RecordableMethods):
             results = ((dn, {attr: [] for attr in attrs.keys()})
                        for dn, attrs in results)
 
-        return list(results)
+        results_list = list(results)
+        for result in results_list:
+            if '_referral' in result[1]:
+                referral_info = {
+                    'info': 'Referral:\n' + result[1]['_referral'],
+                    'desc': 'Referral'
+                }
+                raise ldap.REFERRAL(referral_info)
+
+        return results_list
 
     def _modify_s(self, dn, mod_attrs):
         self._check_valid_dn(dn)
