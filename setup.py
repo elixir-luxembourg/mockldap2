@@ -12,7 +12,7 @@ def readall(path):
 
 setup(
     name='mockldap',
-    version='0.3.0.post1lcsb',
+    version='0.3.0.post1.dev1',
     description="A simple mock implementation of python-ldap.",
     url='https://github.com/psagers/mockldap',
     project_urls={
